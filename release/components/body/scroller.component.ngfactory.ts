@@ -5,32 +5,27 @@
  */
  /* tslint:disable */
 
+
 import * as import0 from '@angular/core';
 import * as import1 from '../../../../build/components/body/scroller.component';
 const styles_ScrollerComponent:any[] = ([] as any[]);
-export const RenderType_ScrollerComponent:import0.RendererTypeV2 = import0.ɵcrt({
+export const RenderType_ScrollerComponent:import0.RendererType2 = import0.ɵcrt({
   encapsulation: 2,
   styles: styles_ScrollerComponent,
   data: {}
 }
 );
-export function View_ScrollerComponent_0():import0.ɵViewDefinition {
+export function View_ScrollerComponent_0(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-    import0.ɵted((null as any),['\n    ']),
-    import0.ɵncd((null as any),0),
-    import0.ɵted((null as any),['\n  '])
+    (log()(),import0.ɵted((null as any),['\n    '])),
+    (log()(),import0.ɵncd((null as any),0)),
+    (log()(),import0.ɵted((null as any),['\n  ']))
   ]
   ,(null as any),(null as any));
 }
-const RenderType_ScrollerComponent_Host:import0.RendererTypeV2 = import0.ɵcrt({
-  encapsulation: 2,
-  styles: ([] as any[]),
-  data: {}
-}
-);
-function View_ScrollerComponent_Host_0():import0.ɵViewDefinition {
+function View_ScrollerComponent_Host_0(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-      import0.ɵeld(0,(null as any),(null as any),1,'datatable-scroller',[[
+      (log()(),import0.ɵeld(0,(null as any),(null as any),1,'datatable-scroller',[[
         'class',
         'datatable-scroll'
       ]
@@ -48,12 +43,12 @@ function View_ScrollerComponent_Host_0():import0.ɵViewDefinition {
       ]
 
     ]
-    ,(null as any),(null as any),View_ScrollerComponent_0,RenderType_ScrollerComponent),
-    import0.ɵdid(122880,(null as any),0,import1.ScrollerComponent,[
+    ,(null as any),(null as any),View_ScrollerComponent_0,RenderType_ScrollerComponent)),
+    (log()(),import0.ɵdid(122880,(null as any),0,import1.ScrollerComponent,[
       import0.ElementRef,
       import0.Renderer
     ]
-    ,(null as any),(null as any))
+    ,(null as any),(null as any)))
   ]
   ,(check,view) => {
     check(view,1,0);
@@ -64,3 +59,4 @@ function View_ScrollerComponent_Host_0():import0.ɵViewDefinition {
   });
 }
 export const ScrollerComponentNgFactory:import0.ComponentFactory<import1.ScrollerComponent> = import0.ɵccf('datatable-scroller',import1.ScrollerComponent,View_ScrollerComponent_Host_0);
+//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiQzovZGV2L3RlbXAvbmd4LWRhdGF0YWJsZS9uZ3gtZGF0YXRhYmxlLmZvcmsvYnVpbGQvY29tcG9uZW50cy9ib2R5L3Njcm9sbGVyLmNvbXBvbmVudC5uZ2ZhY3RvcnkudHMiLCJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJuZzovLy9DOi9kZXYvdGVtcC9uZ3gtZGF0YXRhYmxlL25neC1kYXRhdGFibGUuZm9yay9idWlsZC9jb21wb25lbnRzL2JvZHkvc2Nyb2xsZXIuY29tcG9uZW50LnRzIiwibmc6Ly8vQzovZGV2L3RlbXAvbmd4LWRhdGF0YWJsZS9uZ3gtZGF0YXRhYmxlLmZvcmsvYnVpbGQvY29tcG9uZW50cy9ib2R5L3Njcm9sbGVyLmNvbXBvbmVudC50cy5TY3JvbGxlckNvbXBvbmVudC5odG1sIiwibmc6Ly8vQzovZGV2L3RlbXAvbmd4LWRhdGF0YWJsZS9uZ3gtZGF0YXRhYmxlLmZvcmsvYnVpbGQvY29tcG9uZW50cy9ib2R5L3Njcm9sbGVyLmNvbXBvbmVudC50cy5TY3JvbGxlckNvbXBvbmVudF9Ib3N0Lmh0bWwiXSwic291cmNlc0NvbnRlbnQiOltudWxsLCJcbiAgICA8bmctY29udGVudD48L25nLWNvbnRlbnQ+XG4gICIsIjxkYXRhdGFibGUtc2Nyb2xsZXI+PC9kYXRhdGFibGUtc2Nyb2xsZXI+Il0sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQ0FBO0lBQ0k7SUFBeUI7Ozs7OztNQ0Q3QjtRQUFBO1FBQUE7TUFBQTtJQUFBO01BQUE7UUFBQTtRQUFBO1FBQUE7TUFBQTs7TUFBQTtRQUFBO1FBQUE7UUFBQTtNQUFBOztJQUFBO0tBQUE7SUFBQTs7O0lBQUE7S0FBQTs7O0lBQUE7O0lBQUE7SUFBQTtJQUFBLGVBQUEsbUJBQUE7OzsifQ==

@@ -5,25 +5,26 @@
  */
  /* tslint:disable */
 
+
 import * as import0 from '@angular/core';
 import * as import1 from '@angular/common';
 import * as import2 from '../../../../build/components/header/header-cell.component';
 const styles_DataTableHeaderCellComponent:any[] = ([] as any[]);
-export const RenderType_DataTableHeaderCellComponent:import0.RendererTypeV2 = import0.ɵcrt({
+export const RenderType_DataTableHeaderCellComponent:import0.RendererType2 = import0.ɵcrt({
   encapsulation: 2,
   styles: styles_DataTableHeaderCellComponent,
   data: {}
 }
 );
-function View_DataTableHeaderCellComponent_1():import0.ɵViewDefinition {
+function View_DataTableHeaderCellComponent_1(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-      import0.ɵeld(0,(null as any),(null as any),3,'label',[[
+      (log()(),import0.ɵeld(0,(null as any),(null as any),3,'label',[[
         'class',
         'datatable-checkbox'
       ]
-    ],(null as any),(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-      import0.ɵeld(0,(null as any),(null as any),0,'input',[[
+    ],(null as any),(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),0,'input',[[
         'type',
         'checkbox'
       ]
@@ -44,24 +45,25 @@ function View_DataTableHeaderCellComponent_1():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),['\n      '])
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      ']))
   ]
   ,(null as any),(check,view) => {
     var comp:any = view.component;
+    check(view,0,0);
     const currVal_0:any = comp.allRowsSelected;
     check(view,2,0,currVal_0);
   });
 }
-function View_DataTableHeaderCellComponent_2():import0.ɵViewDefinition {
+function View_DataTableHeaderCellComponent_2(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-      import0.ɵeld(0,(null as any),(null as any),4,'span',[[
+      (log()(),import0.ɵeld(0,(null as any),(null as any),4,'span',[[
         'class',
         'datatable-header-cell-wrapper'
       ]
-    ],(null as any),(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-      import0.ɵeld(0,(null as any),(null as any),1,'span',[[
+    ],(null as any),(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),1,'span',[[
         'class',
         'datatable-header-cell-label draggable'
       ]
@@ -82,23 +84,24 @@ function View_DataTableHeaderCellComponent_2():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-    import0.ɵted((null as any),['\n      '])
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+    (log()(),import0.ɵted((null as any),['\n      ']))
   ]
   ,(null as any),(check,view) => {
     var comp:any = view.component;
+    check(view,0,0);
     const currVal_0:any = comp.name;
     check(view,2,0,currVal_0);
   });
 }
-function View_DataTableHeaderCellComponent_4():import0.ɵViewDefinition {
-  return import0.ɵvid(0,[import0.ɵted((null as any),['\n      '])],(null as any),(null as any));
+function View_DataTableHeaderCellComponent_4(log:any):import0.ɵViewDefinition {
+  return import0.ɵvid(0,[(log()(),import0.ɵted((null as any),['\n      ']))],(null as any),(null as any));
 }
-function View_DataTableHeaderCellComponent_3():import0.ɵViewDefinition {
+function View_DataTableHeaderCellComponent_3(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-    import0.ɵand(8388608,(null as any),(null as any),2,(null as any),View_DataTableHeaderCellComponent_4),
-    import0.ɵdid(270336,(null as any),0,import1.NgTemplateOutlet,[import0.ViewContainerRef],{
+    (log()(),import0.ɵand(8388608,(null as any),(null as any),2,(null as any),View_DataTableHeaderCellComponent_4)),
+    (log()(),import0.ɵdid(270336,(null as any),0,import1.NgTemplateOutlet,[import0.ViewContainerRef],{
       ngTemplateOutlet: [
         0,
         'ngTemplateOutlet'
@@ -110,14 +113,14 @@ function View_DataTableHeaderCellComponent_3():import0.ɵViewDefinition {
       ]
 
     }
-    ,(null as any)),
-    import0.ɵpod([
+    ,(null as any))),
+    (log()(),import0.ɵpod([
       'column',
       'sortDir',
       'sortFn'
     ]
-    ),
-    import0.ɵand(0,(null as any),(null as any),0)
+    )),
+    (log()(),import0.ɵand(0,(null as any),(null as any),0))
   ]
   ,(check,view) => {
     var comp:any = view.component;
@@ -126,13 +129,13 @@ function View_DataTableHeaderCellComponent_3():import0.ɵViewDefinition {
     check(view,1,0,currVal_0,currVal_1);
   },(null as any));
 }
-export function View_DataTableHeaderCellComponent_0():import0.ɵViewDefinition {
+export function View_DataTableHeaderCellComponent_0(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-    import0.ɵted((null as any),['\n    ']),
-    import0.ɵeld(0,(null as any),(null as any),13,'div',([] as any[]),(null as any),(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTableHeaderCellComponent_1),
-    import0.ɵdid(8192,(null as any),0,import1.NgIf,[
+    (log()(),import0.ɵted((null as any),['\n    '])),
+    (log()(),import0.ɵeld(0,(null as any),(null as any),13,'div',([] as any[]),(null as any),(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTableHeaderCellComponent_1)),
+    (log()(),import0.ɵdid(8192,(null as any),0,import1.NgIf,[
       import0.ViewContainerRef,
       import0.TemplateRef
     ]
@@ -140,10 +143,10 @@ export function View_DataTableHeaderCellComponent_0():import0.ɵViewDefinition {
         0,
         'ngIf'
       ]
-    },(null as any)),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTableHeaderCellComponent_2),
-    import0.ɵdid(8192,(null as any),0,import1.NgIf,[
+    },(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTableHeaderCellComponent_2)),
+    (log()(),import0.ɵdid(8192,(null as any),0,import1.NgIf,[
       import0.ViewContainerRef,
       import0.TemplateRef
     ]
@@ -151,10 +154,10 @@ export function View_DataTableHeaderCellComponent_0():import0.ɵViewDefinition {
         0,
         'ngIf'
       ]
-    },(null as any)),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTableHeaderCellComponent_3),
-    import0.ɵdid(8192,(null as any),0,import1.NgIf,[
+    },(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTableHeaderCellComponent_3)),
+    (log()(),import0.ɵdid(8192,(null as any),0,import1.NgIf,[
       import0.ViewContainerRef,
       import0.TemplateRef
     ]
@@ -162,9 +165,9 @@ export function View_DataTableHeaderCellComponent_0():import0.ɵViewDefinition {
         0,
         'ngIf'
       ]
-    },(null as any)),
-    import0.ɵted((null as any),['\n      ']),
-      import0.ɵeld(0,(null as any),(null as any),1,'span',([] as any[]),[[
+    },(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),1,'span',([] as any[]),[[
         3,
         'className',
         0
@@ -181,10 +184,10 @@ export function View_DataTableHeaderCellComponent_0():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵted((null as any),['\n    ']),
-    import0.ɵted((null as any),['\n  '])
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵted((null as any),['\n    '])),
+    (log()(),import0.ɵted((null as any),['\n  ']))
   ]
   ,(check,view) => {
     var comp:import2.DataTableHeaderCellComponent = view.component;
@@ -196,19 +199,14 @@ export function View_DataTableHeaderCellComponent_0():import0.ɵViewDefinition {
     check(view,10,0,currVal_2);
   },(check,view) => {
     var comp:import2.DataTableHeaderCellComponent = view.component;
-    const currVal_0:any = comp.sortClass;
-    check(view,12,0,currVal_0);
+    check(view,1,0);
+    const currVal_3:any = comp.sortClass;
+    check(view,12,0,currVal_3);
   });
 }
-const RenderType_DataTableHeaderCellComponent_Host:import0.RendererTypeV2 = import0.ɵcrt({
-  encapsulation: 2,
-  styles: ([] as any[]),
-  data: {}
-}
-);
-function View_DataTableHeaderCellComponent_Host_0():import0.ɵViewDefinition {
+function View_DataTableHeaderCellComponent_Host_0(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-    import0.ɵeld(0,(null as any),(null as any),1,'datatable-header-cell',([] as any[]),[
+    (log()(),import0.ɵeld(0,(null as any),(null as any),1,'datatable-header-cell',([] as any[]),[
       [
         2,
         'height',
@@ -246,10 +244,12 @@ function View_DataTableHeaderCellComponent_Host_0():import0.ɵViewDefinition {
       ]
 
     ]
-    ,(null as any),(null as any),View_DataTableHeaderCellComponent_0,RenderType_DataTableHeaderCellComponent),
-    import0.ɵdid(24576,(null as any),0,import2.DataTableHeaderCellComponent,([] as any[]),(null as any),(null as any))
+    ,(null as any),(null as any),View_DataTableHeaderCellComponent_0,RenderType_DataTableHeaderCellComponent)),
+    (log()(),import0.ɵdid(24576,(null as any),0,import2.DataTableHeaderCellComponent,([] as any[]),(null as any),(null as any)))
   ]
-  ,(null as any),(check,view) => {
+  ,(check,view) => {
+    check(view,1,0);
+  },(check,view) => {
     const currVal_0:any = import0.ɵnov(view,1).headerHeight;
     const currVal_1:any = import0.ɵnov(view,1).columnCssClasses;
     const currVal_2:any = import0.ɵnov(view,1).name;
@@ -260,3 +260,4 @@ function View_DataTableHeaderCellComponent_Host_0():import0.ɵViewDefinition {
   });
 }
 export const DataTableHeaderCellComponentNgFactory:import0.ComponentFactory<import2.DataTableHeaderCellComponent> = import0.ɵccf('datatable-header-cell',import2.DataTableHeaderCellComponent,View_DataTableHeaderCellComponent_Host_0);
+//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiQzovZGV2L3RlbXAvbmd4LWRhdGF0YWJsZS9uZ3gtZGF0YXRhYmxlLmZvcmsvYnVpbGQvY29tcG9uZW50cy9oZWFkZXIvaGVhZGVyLWNlbGwuY29tcG9uZW50Lm5nZmFjdG9yeS50cyIsInZlcnNpb24iOjMsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5nOi8vL0M6L2Rldi90ZW1wL25neC1kYXRhdGFibGUvbmd4LWRhdGF0YWJsZS5mb3JrL2J1aWxkL2NvbXBvbmVudHMvaGVhZGVyL2hlYWRlci1jZWxsLmNvbXBvbmVudC50cyIsIm5nOi8vL0M6L2Rldi90ZW1wL25neC1kYXRhdGFibGUvbmd4LWRhdGF0YWJsZS5mb3JrL2J1aWxkL2NvbXBvbmVudHMvaGVhZGVyL2hlYWRlci1jZWxsLmNvbXBvbmVudC50cy5EYXRhVGFibGVIZWFkZXJDZWxsQ29tcG9uZW50Lmh0bWwiLCJuZzovLy9DOi9kZXYvdGVtcC9uZ3gtZGF0YXRhYmxlL25neC1kYXRhdGFibGUuZm9yay9idWlsZC9jb21wb25lbnRzL2hlYWRlci9oZWFkZXItY2VsbC5jb21wb25lbnQudHMuRGF0YVRhYmxlSGVhZGVyQ2VsbENvbXBvbmVudF9Ib3N0Lmh0bWwiXSwic291cmNlc0NvbnRlbnQiOltudWxsLCJcbiAgICA8ZGl2PlxuICAgICAgPGxhYmVsXG4gICAgICAgICpuZ0lmPVwiaXNDaGVja2JveGFibGVcIiBcbiAgICAgICAgY2xhc3M9XCJkYXRhdGFibGUtY2hlY2tib3hcIj5cbiAgICAgICAgPGlucHV0IFxuICAgICAgICAgIHR5cGU9XCJjaGVja2JveFwiXG4gICAgICAgICAgW2F0dHIuY2hlY2tlZF09XCJhbGxSb3dzU2VsZWN0ZWRcIlxuICAgICAgICAgIChjaGFuZ2UpPVwic2VsZWN0LmVtaXQoIWFsbFJvd3NTZWxlY3RlZClcIiBcbiAgICAgICAgLz5cbiAgICAgIDwvbGFiZWw+XG4gICAgICA8c3BhbiBcbiAgICAgICAgKm5nSWY9XCIhY29sdW1uLmhlYWRlclRlbXBsYXRlXCJcbiAgICAgICAgY2xhc3M9XCJkYXRhdGFibGUtaGVhZGVyLWNlbGwtd3JhcHBlclwiPlxuICAgICAgICA8c3BhblxuICAgICAgICAgIGNsYXNzPVwiZGF0YXRhYmxlLWhlYWRlci1jZWxsLWxhYmVsIGRyYWdnYWJsZVwiXG4gICAgICAgICAgKGNsaWNrKT1cIm9uU29ydCgpXCJcbiAgICAgICAgICBbaW5uZXJIVE1MXT1cIm5hbWVcIj5cbiAgICAgICAgPC9zcGFuPlxuICAgICAgPC9zcGFuPlxuICAgICAgPG5nLXRlbXBsYXRlXG4gICAgICAgICpuZ0lmPVwiY29sdW1uLmhlYWRlclRlbXBsYXRlXCJcbiAgICAgICAgW25nVGVtcGxhdGVPdXRsZXRdPVwiY29sdW1uLmhlYWRlclRlbXBsYXRlXCJcbiAgICAgICAgW25nT3V0bGV0Q29udGV4dF09XCJ7IFxuICAgICAgICAgIGNvbHVtbjogY29sdW1uLCBcbiAgICAgICAgICBzb3J0RGlyOiBzb3J0RGlyLFxuICAgICAgICAgIHNvcnRGbjogc29ydEZuXG4gICAgICAgIH1cIj5cbiAgICAgIDwvbmctdGVtcGxhdGU+XG4gICAgICA8c3BhblxuICAgICAgICAoY2xpY2spPVwib25Tb3J0KClcIlxuICAgICAgICBbY2xhc3NdPVwic29ydENsYXNzXCI+XG4gICAgICA8L3NwYW4+XG4gICAgPC9kaXY+XG4gICIsIjxkYXRhdGFibGUtaGVhZGVyLWNlbGw+PC9kYXRhdGFibGUtaGVhZGVyLWNlbGw+Il0sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUNFTTtRQUFBO1FBQUE7TUFBQTtJQUFBO0lBRTZCO01BQzNCO1FBQUE7UUFBQTtNQUFBO01BQUE7UUFBQTtRQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUE7UUFBQTtNQUFBO0lBQUE7TUFBQTtNQUFBO01BR0U7UUFBQTtRQUFBO01BQUE7TUFIRjtJQUFBO0lBSUU7Ozs7SUFQSjtJQUtJO0lBRkYsZUFFRSxTQUZGOzs7OztNQU1GO1FBQUE7UUFBQTtNQUFBO0lBQUE7SUFFd0M7TUFDdEM7UUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBO1FBQUE7UUFBQTtNQUFBO01BQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtNQUFBO01BQUE7TUFFRTtRQUFBO1FBQUE7TUFBQTtNQUZGO0lBQUE7SUFHcUI7SUFDZDs7OztJQVBUO0lBTUk7SUFIRixlQUdFLFNBSEY7Ozs7eUJBYUc7Ozs7SUFQTDtJQUFBO01BQUE7UUFBQTtRQUFBO01BQUE7O01BQUE7UUFBQTtRQUFBO01BQUE7O0lBQUE7S0FBQTtJQUdFO01BQUE7TUFBQTtNQUFBO0lBQUE7SUFBQTs7Ozs7SUFEQTtJQUNBO0lBSEYsZUFFRSxVQUNBLFNBSEY7Ozs7O0lBcEJOO0lBQ0k7SUFBSztJQUNIO0lBQUE7OztJQUFBO09BQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtJQVFRO0lBQ1I7SUFBQTs7O0lBQUE7T0FBQTtRQUFBO1FBQUE7TUFBQTtJQUFBO0lBUU87SUFDUDtJQUFBOzs7SUFBQTtPQUFBO1FBQUE7UUFBQTtNQUFBO0lBQUE7SUFRYztNQUNkO1FBQUE7UUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBO1FBQUE7TUFBQTtJQUFBO01BQUE7TUFBQTtNQUNFO1FBQUE7UUFBQTtNQUFBO01BREY7SUFBQTtJQUVzQjtJQUNmO0lBQ0g7Ozs7SUE5QkY7SUFERixlQUNFLFNBREY7SUFVRTtJQURGLGVBQ0UsU0FERjtJQVVFO0lBREYsZ0JBQ0UsU0FERjs7O0lBbkJGO0lBOEJJO0lBRkYsZ0JBRUUsU0FGRjs7Ozs7SUM3Qk47TUFBQTtRQUFBO1FBQUE7UUFBQTtNQUFBOztNQUFBO1FBQUE7UUFBQTtRQUFBO01BQUE7O01BQUE7UUFBQTtRQUFBO1FBQUE7TUFBQTs7TUFBQTtRQUFBO1FBQUE7UUFBQTtNQUFBOztNQUFBO1FBQUE7UUFBQTtRQUFBO01BQUE7O01BQUE7UUFBQTtRQUFBO1FBQUE7TUFBQTs7SUFBQTtLQUFBO0lBQUE7OztJQUFBOztJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBLGVBQUEsMkRBQUE7OzsifQ==

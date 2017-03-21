@@ -5,19 +5,20 @@
  */
  /* tslint:disable */
 
+
 import * as import0 from '@angular/core';
 import * as import1 from '../../../../build/components/footer/pager.component';
 import * as import2 from '@angular/common';
 const styles_DataTablePagerComponent:any[] = ([] as any[]);
-export const RenderType_DataTablePagerComponent:import0.RendererTypeV2 = import0.ɵcrt({
+export const RenderType_DataTablePagerComponent:import0.RendererType2 = import0.ɵcrt({
   encapsulation: 2,
   styles: styles_DataTablePagerComponent,
   data: {}
 }
 );
-function View_DataTablePagerComponent_1():import0.ɵViewDefinition {
+function View_DataTablePagerComponent_1(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-      import0.ɵeld(0,(null as any),(null as any),4,'li',[[
+      (log()(),import0.ɵeld(0,(null as any),(null as any),4,'li',[[
         'class',
         'pages'
       ]
@@ -25,9 +26,9 @@ function View_DataTablePagerComponent_1():import0.ɵViewDefinition {
         1,
         'active'
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-      import0.ɵeld(0,(null as any),(null as any),1,'a',[[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),1,'a',[[
         'href',
         'javascript:void(0)'
       ]
@@ -43,38 +44,39 @@ function View_DataTablePagerComponent_1():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),[
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),[
       '\n          ',
       '\n        '
     ]
-    ),
-    import0.ɵted((null as any),['\n      '])
+    )),
+    (log()(),import0.ɵted((null as any),['\n      ']))
   ]
   ,(null as any),(check,view) => {
     var comp:any = view.component;
     const currVal_0:any = (view.context.$implicit.number === comp.page);
     check(view,0,0,currVal_0);
+    check(view,2,0);
     const currVal_1:any = view.context.$implicit.text;
     check(view,3,0,currVal_1);
   });
 }
-export function View_DataTablePagerComponent_0():import0.ɵViewDefinition {
+export function View_DataTablePagerComponent_0(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(2,[
-    import0.ɵted((null as any),['\n    ']),
-      import0.ɵeld(0,(null as any),(null as any),36,'ul',[[
+    (log()(),import0.ɵted((null as any),['\n    '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),36,'ul',[[
         'class',
         'pager'
       ]
-    ],(null as any),(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n      ']),
-      import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
+    ],(null as any),(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
         1,
         'disabled'
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-      import0.ɵeld(0,(null as any),(null as any),3,'a',[[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),3,'a',[[
         'href',
         'javascript:void(0)'
       ]
@@ -90,24 +92,24 @@ export function View_DataTablePagerComponent_0():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),['\n          ']),
-      import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n          '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
         3,
         'className',
         0
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵted((null as any),['\n      ']),
-      import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
         1,
         'disabled'
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-      import0.ɵeld(0,(null as any),(null as any),3,'a',[[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),3,'a',[[
         'href',
         'javascript:void(0)'
       ]
@@ -123,19 +125,19 @@ export function View_DataTablePagerComponent_0():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),['\n          ']),
-      import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n          '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
         3,
         'className',
         0
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTablePagerComponent_1),
-    import0.ɵdid(401408,(null as any),0,import2.NgForOf,[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵand(8388608,(null as any),(null as any),1,(null as any),View_DataTablePagerComponent_1)),
+    (log()(),import0.ɵdid(401408,(null as any),0,import2.NgForOf,[
       import0.ViewContainerRef,
       import0.TemplateRef,
       import0.IterableDiffers
@@ -144,15 +146,15 @@ export function View_DataTablePagerComponent_0():import0.ɵViewDefinition {
         0,
         'ngForOf'
       ]
-    },(null as any)),
-    import0.ɵted((null as any),['\n      ']),
-      import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
+    },(null as any))),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
         1,
         'disabled'
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-      import0.ɵeld(0,(null as any),(null as any),3,'a',[[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),3,'a',[[
         'href',
         'javascript:void(0)'
       ]
@@ -168,24 +170,24 @@ export function View_DataTablePagerComponent_0():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),['\n          ']),
-      import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n          '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
         3,
         'className',
         0
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵted((null as any),['\n      ']),
-      import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),6,'li',([] as any[]),[[
         1,
         'disabled'
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-      import0.ɵeld(0,(null as any),(null as any),3,'a',[[
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),3,'a',[[
         'href',
         'javascript:void(0)'
       ]
@@ -201,58 +203,62 @@ export function View_DataTablePagerComponent_0():import0.ɵViewDefinition {
         allowDefault = (pd_0 && allowDefault);
       }
       return allowDefault;
-    },(null as any),(null as any)),
-    import0.ɵted((null as any),['\n          ']),
-      import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
+    },(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n          '])),
+      (log()(),import0.ɵeld(0,(null as any),(null as any),0,'i',([] as any[]),[[
         3,
         'className',
         0
       ]
-    ],(null as any),(null as any),(null as any),(null as any)),
-    import0.ɵted((null as any),['\n        ']),
-    import0.ɵted((null as any),['\n      ']),
-    import0.ɵted((null as any),['\n    ']),
-    import0.ɵted((null as any),['\n  '])
+    ],(null as any),(null as any),(null as any),(null as any))),
+    (log()(),import0.ɵted((null as any),['\n        '])),
+    (log()(),import0.ɵted((null as any),['\n      '])),
+    (log()(),import0.ɵted((null as any),['\n    '])),
+    (log()(),import0.ɵted((null as any),['\n  ']))
   ]
   ,(check,view) => {
     var comp:import1.DataTablePagerComponent = view.component;
-    const currVal_0:any = comp.pages;
-    check(view,20,0,currVal_0);
+    const currVal_4:any = comp.pages;
+    check(view,20,0,currVal_4);
   },(check,view) => {
     var comp:import1.DataTablePagerComponent = view.component;
+    check(view,1,0);
     const currVal_0:boolean = !comp.canPrevious();
     check(view,3,0,currVal_0);
+    check(view,5,0);
     const currVal_1:any = import0.ɵinlineInterpolate(1,'',comp.pagerPreviousIcon,'');
     check(view,7,0,currVal_1);
     const currVal_2:boolean = !comp.canPrevious();
     check(view,11,0,currVal_2);
+    check(view,13,0);
     const currVal_3:any = import0.ɵinlineInterpolate(1,'',comp.pagerLeftArrowIcon,'');
     check(view,15,0,currVal_3);
-    const currVal_4:boolean = !comp.canNext();
-    check(view,22,0,currVal_4);
-    const currVal_5:any = import0.ɵinlineInterpolate(1,'',comp.pagerRightArrowIcon,'');
-    check(view,26,0,currVal_5);
-    const currVal_6:boolean = !comp.canNext();
-    check(view,30,0,currVal_6);
-    const currVal_7:any = import0.ɵinlineInterpolate(1,'',comp.pagerNextIcon,'');
-    check(view,34,0,currVal_7);
+    const currVal_5:boolean = !comp.canNext();
+    check(view,22,0,currVal_5);
+    check(view,24,0);
+    const currVal_6:any = import0.ɵinlineInterpolate(1,'',comp.pagerRightArrowIcon,'');
+    check(view,26,0,currVal_6);
+    const currVal_7:boolean = !comp.canNext();
+    check(view,30,0,currVal_7);
+    check(view,32,0);
+    const currVal_8:any = import0.ɵinlineInterpolate(1,'',comp.pagerNextIcon,'');
+    check(view,34,0,currVal_8);
   });
 }
-const RenderType_DataTablePagerComponent_Host:import0.RendererTypeV2 = import0.ɵcrt({
-  encapsulation: 2,
-  styles: ([] as any[]),
-  data: {}
-}
-);
-function View_DataTablePagerComponent_Host_0():import0.ɵViewDefinition {
+function View_DataTablePagerComponent_Host_0(log:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
-      import0.ɵeld(0,(null as any),(null as any),1,'datatable-pager',[[
+      (log()(),import0.ɵeld(0,(null as any),(null as any),1,'datatable-pager',[[
         'class',
         'datatable-pager'
       ]
-    ],(null as any),(null as any),(null as any),View_DataTablePagerComponent_0,RenderType_DataTablePagerComponent),
-    import0.ɵdid(24576,(null as any),0,import1.DataTablePagerComponent,([] as any[]),(null as any),(null as any))
+    ],(null as any),(null as any),(null as any),View_DataTablePagerComponent_0,RenderType_DataTablePagerComponent)),
+    (log()(),import0.ɵdid(24576,(null as any),0,import1.DataTablePagerComponent,([] as any[]),(null as any),(null as any)))
   ]
-  ,(null as any),(null as any));
+  ,(check,view) => {
+    check(view,1,0);
+  },(check,view) => {
+    check(view,0,0);
+  });
 }
 export const DataTablePagerComponentNgFactory:import0.ComponentFactory<import1.DataTablePagerComponent> = import0.ɵccf('datatable-pager',import1.DataTablePagerComponent,View_DataTablePagerComponent_Host_0);
+//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiQzovZGV2L3RlbXAvbmd4LWRhdGF0YWJsZS9uZ3gtZGF0YXRhYmxlLmZvcmsvYnVpbGQvY29tcG9uZW50cy9mb290ZXIvcGFnZXIuY29tcG9uZW50Lm5nZmFjdG9yeS50cyIsInZlcnNpb24iOjMsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5nOi8vL0M6L2Rldi90ZW1wL25neC1kYXRhdGFibGUvbmd4LWRhdGF0YWJsZS5mb3JrL2J1aWxkL2NvbXBvbmVudHMvZm9vdGVyL3BhZ2VyLmNvbXBvbmVudC50cyIsIm5nOi8vL0M6L2Rldi90ZW1wL25neC1kYXRhdGFibGUvbmd4LWRhdGF0YWJsZS5mb3JrL2J1aWxkL2NvbXBvbmVudHMvZm9vdGVyL3BhZ2VyLmNvbXBvbmVudC50cy5EYXRhVGFibGVQYWdlckNvbXBvbmVudC5odG1sIiwibmc6Ly8vQzovZGV2L3RlbXAvbmd4LWRhdGF0YWJsZS9uZ3gtZGF0YXRhYmxlLmZvcmsvYnVpbGQvY29tcG9uZW50cy9mb290ZXIvcGFnZXIuY29tcG9uZW50LnRzLkRhdGFUYWJsZVBhZ2VyQ29tcG9uZW50X0hvc3QuaHRtbCJdLCJzb3VyY2VzQ29udGVudCI6W251bGwsIlxuICAgIDx1bCBjbGFzcz1cInBhZ2VyXCI+XG4gICAgICA8bGkgW2NsYXNzLmRpc2FibGVkXT1cIiFjYW5QcmV2aW91cygpXCI+XG4gICAgICAgIDxhXG4gICAgICAgICAgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKVwiXG4gICAgICAgICAgKGNsaWNrKT1cInNlbGVjdFBhZ2UoMSlcIj5cbiAgICAgICAgICA8aSBjbGFzcz1cInt7cGFnZXJQcmV2aW91c0ljb259fVwiPjwvaT5cbiAgICAgICAgPC9hPlxuICAgICAgPC9saT5cbiAgICAgIDxsaSBbY2xhc3MuZGlzYWJsZWRdPVwiIWNhblByZXZpb3VzKClcIj5cbiAgICAgICAgPGFcbiAgICAgICAgICBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApXCJcbiAgICAgICAgICAoY2xpY2spPVwicHJldlBhZ2UoKVwiPlxuICAgICAgICAgIDxpIGNsYXNzPVwie3twYWdlckxlZnRBcnJvd0ljb259fVwiPjwvaT5cbiAgICAgICAgPC9hPlxuICAgICAgPC9saT5cbiAgICAgIDxsaVxuICAgICAgICBjbGFzcz1cInBhZ2VzXCJcbiAgICAgICAgKm5nRm9yPVwibGV0IHBnIG9mIHBhZ2VzXCJcbiAgICAgICAgW2NsYXNzLmFjdGl2ZV09XCJwZy5udW1iZXIgPT09IHBhZ2VcIj5cbiAgICAgICAgPGFcbiAgICAgICAgICBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApXCJcbiAgICAgICAgICAoY2xpY2spPVwic2VsZWN0UGFnZShwZy5udW1iZXIpXCI+XG4gICAgICAgICAge3twZy50ZXh0fX1cbiAgICAgICAgPC9hPlxuICAgICAgPC9saT5cbiAgICAgIDxsaSBbY2xhc3MuZGlzYWJsZWRdPVwiIWNhbk5leHQoKVwiPlxuICAgICAgICA8YVxuICAgICAgICAgIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMClcIlxuICAgICAgICAgIChjbGljayk9XCJuZXh0UGFnZSgpXCI+XG4gICAgICAgICAgPGkgY2xhc3M9XCJ7e3BhZ2VyUmlnaHRBcnJvd0ljb259fVwiPjwvaT5cbiAgICAgICAgPC9hPlxuICAgICAgPC9saT5cbiAgICAgIDxsaSBbY2xhc3MuZGlzYWJsZWRdPVwiIWNhbk5leHQoKVwiPlxuICAgICAgICA8YVxuICAgICAgICAgIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMClcIlxuICAgICAgICAgIChjbGljayk9XCJzZWxlY3RQYWdlKHRvdGFsUGFnZXMpXCI+XG4gICAgICAgICAgPGkgY2xhc3M9XCJ7e3BhZ2VyTmV4dEljb259fVwiPjwvaT5cbiAgICAgICAgPC9hPlxuICAgICAgPC9saT5cbiAgICA8L3VsPlxuICAiLCI8ZGF0YXRhYmxlLXBhZ2VyPjwvZGF0YXRhYmxlLXBhZ2VyPiJdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01DZ0JNO1FBQUE7UUFBQTtNQUFBO01BQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUdzQztNQUNwQztRQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUE7UUFBQTtNQUFBO0lBQUE7TUFBQTtNQUFBO01BRUU7UUFBQTtRQUFBO01BQUE7TUFGRjtJQUFBO0lBRWtDO01BQUE7TUFBQTtJQUFBO0lBQUE7SUFFOUI7Ozs7SUFMSjtJQUhGLGVBR0UsU0FIRjtJQUlFO0lBRWtDO0lBQUE7Ozs7O0lBdEIxQztNQUNJO1FBQUE7UUFBQTtNQUFBO0lBQUE7SUFBa0I7TUFDaEI7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFzQztNQUNwQztRQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUE7UUFBQTtNQUFBO0lBQUE7TUFBQTtNQUFBO01BRUU7UUFBQTtRQUFBO01BQUE7TUFGRjtJQUFBO0lBRTBCO01BQ3hCO1FBQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFxQztJQUNuQztJQUNEO01BQ0w7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFzQztNQUNwQztRQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUE7UUFBQTtNQUFBO0lBQUE7TUFBQTtNQUFBO01BRUU7UUFBQTtRQUFBO01BQUE7TUFGRjtJQUFBO0lBRXVCO01BQ3JCO1FBQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFzQztJQUNwQztJQUNEO0lBQ0w7SUFBQTs7OztJQUFBO09BQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtJQVNLO01BQ0w7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFrQztNQUNoQztRQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUE7UUFBQTtNQUFBO0lBQUE7TUFBQTtNQUFBO01BRUU7UUFBQTtRQUFBO01BQUE7TUFGRjtJQUFBO0lBRXVCO01BQ3JCO1FBQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUF1QztJQUNyQztJQUNEO01BQ0w7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFrQztNQUNoQztRQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUE7UUFBQTtNQUFBO0lBQUE7TUFBQTtNQUFBO01BRUU7UUFBQTtRQUFBO01BQUE7TUFGRjtJQUFBO0lBRW1DO01BQ2pDO1FBQUE7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFpQztJQUMvQjtJQUNEO0lBQ0Y7Ozs7SUF0QkQ7SUFGRixnQkFFRSxTQUZGOzs7SUFmRjtJQUNNO0lBQUosZUFBSSxTQUFKO0lBQ0U7SUFHSztJQUFILGVBQUcsU0FBSDtJQUdBO0lBQUosZ0JBQUksU0FBSjtJQUNFO0lBR0s7SUFBSCxnQkFBRyxTQUFIO0lBYUE7SUFBSixnQkFBSSxTQUFKO0lBQ0U7SUFHSztJQUFILGdCQUFHLFNBQUg7SUFHQTtJQUFKLGdCQUFJLFNBQUo7SUFDRTtJQUdLO0lBQUgsZ0JBQUcsU0FBSDs7Ozs7TUNyQ1Y7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFBOzs7SUFBQTs7SUFBQTs7OyJ9
