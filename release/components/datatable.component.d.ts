@@ -425,6 +425,7 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
     rowDiffer: KeyValueDiffer<{}, {}>;
     _count: number;
     _rows: any[];
+    _origRows: any[];
     _columns: any[];
     _columnTemplates: QueryList<DataTableColumnDirective>;
     constructor(element: ElementRef, differs: KeyValueDiffers);
