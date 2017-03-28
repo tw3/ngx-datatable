@@ -1,5 +1,5 @@
 import {
-  Component, Input, EventEmitter, Output, HostBinding
+  Component, Input, EventEmitter, Output, HostBinding, HostListener
 } from '@angular/core';
 
 import { SortDirection, SortType, SelectionType } from '../../types';
@@ -23,7 +23,6 @@ import { nextSortDir } from '../../utils';
         class="datatable-header-cell-wrapper">
         <span
           class="datatable-header-cell-label draggable"
-          (click)="onSort()"
           [innerHTML]="name">
         </span>
       </span>
@@ -37,7 +36,6 @@ import { nextSortDir } from '../../utils';
         }">
       </ng-template>
       <span
-        (click)="onSort()"
         [class]="sortClass">
       </span>
     </div>
@@ -125,7 +123,7 @@ export class DataTableHeaderCellComponent {
     }
   }
 
-  onSort(): void {
+  @HostListener('click') onSort(): void {
     if(!this.column.sortable) return;
 
     const newValue = nextSortDir(this.sortType, this.sortDir);
