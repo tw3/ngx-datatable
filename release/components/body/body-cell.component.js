@@ -83,6 +83,11 @@ var DataTableBodyCellComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    DataTableBodyCellComponent.prototype.ngOnDestroy = function () {
+        if (this.cellTemplate) {
+            this.cellTemplate.clear();
+        }
+    };
     DataTableBodyCellComponent.prototype.onFocus = function () {
         this.isFocused = true;
     };
@@ -155,7 +160,7 @@ var DataTableBodyCellComponent = (function () {
 DataTableBodyCellComponent.decorators = [
     { type: core_1.Component, args: [{
                 selector: 'datatable-body-cell',
-                template: "\n    <div class=\"datatable-body-cell-label\">\n      <label\n        *ngIf=\"column.checkboxable\" \n        class=\"datatable-checkbox\">\n        <input \n          type=\"checkbox\"\n          [checked]=\"isSelected\"\n          (click)=\"onCheckboxChange($event)\" \n        />\n      </label>\n      <span\n        *ngIf=\"!column.cellTemplate\"\n        [innerHTML]=\"value\">\n      </span>\n      <ng-template\n        *ngIf=\"column.cellTemplate\"\n        [ngTemplateOutlet]=\"column.cellTemplate\"\n        [ngOutletContext]=\"{ value: value, row: row, column: column }\">\n      </ng-template>\n    </div>\n  ",
+                template: "\n    <div class=\"datatable-body-cell-label\">\n      <label\n        *ngIf=\"column.checkboxable\" \n        class=\"datatable-checkbox\">\n        <input \n          type=\"checkbox\"\n          [checked]=\"isSelected\"\n          (click)=\"onCheckboxChange($event)\" \n        />\n      </label>\n      <span\n        *ngIf=\"!column.cellTemplate\"\n        [title]=\"value\"\n        [innerHTML]=\"value\">\n      </span>\n      <ng-template\n        *ngIf=\"column.cellTemplate\"\n        [ngTemplateOutlet]=\"column.cellTemplate\"\n        [ngOutletContext]=\"{ value: value, row: row, column: column }\">\n      </ng-template>\n    </div>\n  ",
                 host: {
                     class: 'datatable-body-cell'
                 }
@@ -172,6 +177,7 @@ DataTableBodyCellComponent.propDecorators = {
     'isSelected': [{ type: core_1.Input },],
     'sorts': [{ type: core_1.Input },],
     'activate': [{ type: core_1.Output },],
+    'cellTemplate': [{ type: core_1.ViewChild, args: ['cellTemplate', { read: core_1.ViewContainerRef },] },],
     'columnCssClasses': [{ type: core_1.HostBinding, args: ['class',] },],
     'isFocused': [{ type: core_1.HostBinding, args: ['class.active',] },],
     'isSortActive': [{ type: core_1.HostBinding, args: ['class.sort-active',] },],

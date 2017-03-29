@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.1.1
+- Perf: Fix memory leaks with templates (#464)
+- Bug: Fix row detail expanded and then collapsed not showing anything until scroll
+
+## 7.1.0
+- Bug: Fix title not set on cell template (#629)
+- Chore: Update to official Angular4
+- Chore: Misc build dep updates
+
 ## 7.0.0
 - BREAKING: Update to Angular4!
 - Feature: Row classes (#571), (#348)
