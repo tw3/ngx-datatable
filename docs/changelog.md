@@ -1,5 +1,60 @@
 # Changelog
 
+## 9.1.0
+- Enhancement: Add more context to cells #720
+- Enhancement: Export Pager component #735
+- Bug: Header checkbox when row selection is changed #659
+- Bug: When rowClass() returns a string, the class is not properly added #710
+- Bug: Rename icons so don't conflict with other libs #729
+
+## 9.0.0
+- BREAKING: Fixes for external pagination fixes. Index calculation change being last page = `0 + pageSize` (#714, #138, #391)
+- Feature: Server-side virtual scrolling pagination
+- Demos: Deep linking of demo pages
+
+## 8.2.1
+- Bug: Fix footer styles
+
+## 8.2.0
+- Feature: Footer Templates
+
+## 8.1.0
+- Feature: Dark Theme
+
+## 8.0.1
+- Bug: Fix memory leak (#702)
+- Bug: Don't add column header title attribute when custom template provided (#643)
+- Bug: Only apply pointer to header text (#682)
+- Bug: Fix prop field name with dots (#596)
+- Bug: Virtual scroll + dynamic height in cell detail not working right (#703)
+- Bug: Fix dynamic row height not working right if using server-side pagination
+- Chore: Implement `noImplicitAny` (#671)
+
+## 8.0.0
+- Breaking: Removed `cssClass` from columns in favor of explicit
+- Feature: Added explicit `headerClass` and `cellClass`
+- Feature: Add ability to have callback for those class getters
+- Bug: Fix checkbox select all not updating ui correctly
+
+## 7.3.1
+- Bug: Fix resize handle drag triggering long press
+- Bug: Fix dragging trigging column sorting
+- Bug: Fix column re-ordering not working on FF
+
+## 7.3.0
+- Feature: Dynamic row heights for virtual scrolling
+- Bug: Do not use `document` for universal support (#668)
+
+## 7.2.1
+- Bug: Fix missing type
+
+## 7.2.0
+- Feature: Allow for dynamic Detail Row heights (#653)
+- Feature: Numeric prop support via support array rows (#494)
+- Perf: Optimize sort code by caching valueGetter and compareFn outside loop.
+- Perf: Set ValueGetter on `TableColumn.$$valueGetter`
+- Bug: Alter setColumnDefaults to work with numeric prop values.
+
 ## 7.1.1
 - Perf: Fix memory leaks with templates (#464)
 - Bug: Fix row detail expanded and then collapsed not showing anything until scroll

@@ -6,19 +6,21 @@ import {
 } from '@angular/core';
 
 import {
-  forceFillColumnWidths, adjustColumnWidths, sortRows, scrollbarWidth,
+  forceFillColumnWidths, adjustColumnWidths, sortRows,
   setColumnDefaults, throttleable, translateTemplates
 } from '../utils';
-import { ColumnMode, SortType, SelectionType } from '../types';
+import { ScrollbarHelper } from '../services';
+import { ColumnMode, SortType, SelectionType, TableColumn, ContextmenuType } from '../types';
 import { DataTableBodyComponent } from './body';
 import { DataTableColumnDirective } from './columns';
 import { DatatableRowDetailDirective } from './row-detail';
+import { DatatableFooterDirective } from './footer';
 
 @Component({
   selector: 'ngx-datatable',
   template: `
     <div
-      visibility-observer
+      visibilityObserver
       (visible)="recalculate()">
       <datatable-header
         *ngIf="headerHeight"
@@ -37,13 +39,15 @@ import { DatatableRowDetailDirective } from './row-detail';
         (sort)="onColumnSort($event)"
         (resize)="onColumnResize($event)"
         (reorder)="onColumnReorder($event)"
-        (select)="onHeaderSelect($event)">
+        (select)="onHeaderSelect($event)"
+        (columnContextmenu)="onColumnContextmenu($event)">
       </datatable-header>
       <datatable-body
         [rows]="rows"
         [scrollbarV]="scrollbarV"
         [scrollbarH]="scrollbarH"
         [loadingIndicator]="loadingIndicator"
+        [externalPaging]="externalPaging"
         [rowHeight]="rowHeight"
         [rowCount]="rowCount"
         [offset]="offset"
@@ -62,7 +66,7 @@ import { DatatableRowDetailDirective } from './row-detail';
         [selectCheck]="selectCheck"
         (page)="onBodyPage($event)"
         (activate)="activate.emit($event)"
-        (rowContextmenu)="rowContextmenu.emit($event)"
+        (rowContextmenu)="onRowContextmenu($event)"
         (select)="onBodySelect($event)"
         (scroll)="onBodyScroll($event)">
       </datatable-body>
@@ -72,6 +76,7 @@ import { DatatableRowDetailDirective } from './row-detail';
         [pageSize]="pageSize"
         [offset]="offset"
         [footerHeight]="footerHeight"
+        [footerTemplate]="footer"
         [totalMessage]="messages.totalMessage"
         [pagerLeftArrowIcon]="cssClasses.pagerLeftArrow"
         [pagerRightArrowIcon]="cssClasses.pagerRightArrow"
@@ -97,10 +102,8 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * @memberOf DatatableComponent
    */
   @Input() set rows(val: any) {
+    // auto sort on new updates
     if (!this.externalSorting) {
-      // store original rows (so we can return to the default sort)
-      this._origRows = val;
-      // auto sort on new updates
       val = sortRows(val, this.columns, this.sorts);
     }
 
@@ -125,7 +128,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    *
    * @memberOf DatatableComponent
    */
-  @Input() set columns(val: any[]) {
+  @Input() set columns(val: TableColumn[]) {
     if(val) {
       setColumnDefaults(val);
       this.recalculateColumns(val);
@@ -141,7 +144,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * @type {any[]}
    * @memberOf DatatableComponent
    */
-  get columns(): any[] {
+  get columns(): TableColumn[] {
     return this._columns;
   }
 
@@ -327,12 +330,12 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * @memberOf DatatableComponent
    */
   @Input() cssClasses: any = {
-    sortAscending: 'icon-up',
-    sortDescending: 'icon-down',
-    pagerLeftArrow: 'icon-left',
-    pagerRightArrow: 'icon-right',
-    pagerPrevious: 'icon-prev',
-    pagerNext: 'icon-skip'
+    sortAscending: 'datatable-icon-up',
+    sortDescending: 'datatable-icon-down',
+    pagerLeftArrow: 'datatable-icon-left',
+    pagerRightArrow: 'datatable-icon-right',
+    pagerPrevious: 'datatable-icon-prev',
+    pagerNext: 'datatable-icon-skip'
   };
 
   /**
@@ -458,11 +461,13 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
   @Output() resize: EventEmitter<any> = new EventEmitter();
 
   /**
-   * The context menu was invoked on a row.
+   * The context menu was invoked on the table.
+   * type indicates whether the header or the body was clicked.
+   * content contains either the column or the row that was clicked.
    *
    * @memberOf DatatableComponent
    */
-  @Output() rowContextmenu = new EventEmitter<{ event: MouseEvent, row: any }>(false);
+  @Output() tableContextmenu = new EventEmitter<{ event: MouseEvent, type: ContextmenuType, content: any }>(false);
 
   /**
    * CSS class applied if the header height if fixed height.
@@ -632,6 +637,15 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
   rowDetail: DatatableRowDetailDirective;
 
   /**
+   * Footer template gathered from the ContentChild
+   * 
+   * @type {DatatableFooterDirective}
+   * @memberOf DatatableComponent
+   */
+  @ContentChild(DatatableFooterDirective)
+  footer: DatatableFooterDirective;
+
+  /**
    * Reference to the body component for manually
    * invoking functions on the body.
    *
@@ -653,6 +667,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
   get allRowsSelected(): boolean {
     return this.selected &&
       this.rows &&
+      this.rows.length !== 0 &&
       this.selected.length === this.rows.length;
   }
 
@@ -666,11 +681,14 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
   _count: number = 0;
 
   _rows: any[];
-  _origRows: any[];
-  _columns: any[];
+  _columns: TableColumn[];
   _columnTemplates: QueryList<DataTableColumnDirective>;
 
-  constructor(element: ElementRef, differs: KeyValueDiffers) {
+  constructor(
+    private scrollbarHelper: ScrollbarHelper, 
+    element: ElementRef, 
+    differs: KeyValueDiffers) {
+
     // get ref to elm for measuring
     this.element = element.nativeElement;
     this.rowDiffer = differs.find({}).create(null);
@@ -703,7 +721,19 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
 
     // this has to be done to prevent the change detection
     // tree from freaking out because we are readjusting
-    setTimeout(() => this.recalculate());
+    setTimeout(() => {
+      this.recalculate();
+
+      // emit page for virtual server-side kickoff
+      if(this.externalPaging && this.scrollbarV) {
+        this.page.emit({
+          count: this.count,
+          pageSize: this.pageSize,
+          limit: this.limit,
+          offset: 0
+        });
+      }
+    });
   }
 
   /**
@@ -757,15 +787,16 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    *
    * @memberOf DatatableComponent
    */
-  recalculateColumns(columns: any[] = this.columns,
-                     forceIdx: number = -1,
-                     allowBleed: boolean = this.scrollbarH): any[] {
+  recalculateColumns(
+    columns: any[] = this.columns,
+    forceIdx: number = -1,
+    allowBleed: boolean = this.scrollbarH): any[] {
 
     if (!columns) return;
 
     let width = this.innerWidth;
     if (this.scrollbarV) {
-      width = width - scrollbarWidth;
+      width = width - this.scrollbarHelper.width;
     }
 
     if (this.columnMode === ColumnMode.force) {
@@ -902,6 +933,28 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   /**
+   * The header triggered a contextmenu event.
+   *
+   * @param {*} { event, column }
+   *
+   * @memberOf DatatableComponent
+   */
+  onColumnContextmenu({ event, column }: any): void {
+    this.tableContextmenu.emit({ event, type: ContextmenuType.header, content: column });
+  }
+
+  /**
+   * The body triggered a contextmenu event.
+   *
+   * @param {*} { event, row }
+   *
+   * @memberOf DatatableComponent
+   */
+  onRowContextmenu({ event, row }: any): void {
+    this.tableContextmenu.emit({ event, type: ContextmenuType.body, content: row });
+  }
+
+  /**
    * The header triggered a column resize event.
    *
    * @param {*} { column, newValue }
@@ -978,12 +1031,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
     // the rows again on the 'push' detection...
     if (this.externalSorting === false) {
       // don't use normal setter so we don't resort
-      if (!sorts || sorts.length === 0) {
-        // restore original (unsorted) rows
-        this._rows = this._origRows;
-      } else {
-        this._rows = sortRows(this.rows, this.columns, sorts);
-      }
+      this._rows = sortRows(this.rows, this.columns, sorts);
     }
 
     this.sorts = sorts;
@@ -1005,7 +1053,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
     const allSelected = this.selected.length === this.rows.length;
 
     // remove all existing either way
-    this.selected.splice(0, this.selected.length);
+    this.selected = [];
 
     // do the opposite here
     if (!allSelected) {

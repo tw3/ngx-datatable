@@ -2,7 +2,7 @@ import {
   Component, Input, EventEmitter, Output, HostBinding, HostListener
 } from '@angular/core';
 
-import { SortDirection, SortType, SelectionType } from '../../types';
+import { SortDirection, SortType, SelectionType, TableColumn } from '../../types';
 import { nextSortDir } from '../../utils';
 
 @Component({
@@ -14,7 +14,7 @@ import { nextSortDir } from '../../utils';
         class="datatable-checkbox">
         <input 
           type="checkbox"
-          [attr.checked]="allRowsSelected"
+          [checked]="allRowsSelected"
           (change)="select.emit(!allRowsSelected)" 
         />
       </label>
@@ -23,6 +23,7 @@ import { nextSortDir } from '../../utils';
         class="datatable-header-cell-wrapper">
         <span
           class="datatable-header-cell-label draggable"
+          (click)="onSort()"
           [innerHTML]="name">
         </span>
       </span>
@@ -32,19 +33,26 @@ import { nextSortDir } from '../../utils';
         [ngOutletContext]="{ 
           column: column, 
           sortDir: sortDir,
-          sortFn: sortFn
+          sortFn: sortFn,
+          allRowsSelected: allRowsSelected,
+          selectFn: selectFn
         }">
       </ng-template>
       <span
+        (click)="onSort()"
         [class]="sortClass">
       </span>
     </div>
-  `
+  `,
+  host: {
+    class: 'datatable-header-cell'
+  }
 })
+
 export class DataTableHeaderCellComponent {
 
   @Input() sortType: SortType;
-  @Input() column: any;
+  @Input() column: TableColumn;
   @Input() sortAscendingIcon: string;
   @Input() sortDescendingIcon: string;
   @Input() allRowsSelected: boolean;
@@ -65,6 +73,13 @@ export class DataTableHeaderCellComponent {
 
   @Output() sort: EventEmitter<any> = new EventEmitter();
   @Output() select: EventEmitter<any> = new EventEmitter();
+  @Output() columnContextmenu = new EventEmitter<{ event: MouseEvent, column: any }>(false);
+
+  sortFn = this.onSort.bind(this);
+  sortClass: string;
+  sortDir: SortDirection;
+  _sorts: any[];
+  selectFn = this.select.emit.bind(this.select);
 
   @HostBinding('class')
   get columnCssClasses(): any {
@@ -72,7 +87,24 @@ export class DataTableHeaderCellComponent {
 
     if(this.column.sortable) cls += ' sortable';
     if(this.column.resizeable) cls += ' resizeable';
-    if(this.column.cssClasses) cls += ' ' + this.column.cssClasses;
+    if(this.column.headerClass) {
+      if(typeof this.column.headerClass === 'string') {
+        cls += ' ' + this.column.headerClass;
+      } else if(typeof this.column.headerClass === 'function') {
+        const res = this.column.headerClass({ 
+          column: this.column
+        });
+
+        if(typeof res === 'string') {
+          cls += res;
+        } else if(typeof res === 'object') {
+          const keys = Object.keys(res);
+          for(const k of keys) {
+            if(res[k] === true) cls += ` ${k}`;
+          }
+        }
+      }
+    }
 
     const sortDir = this.sortDir;
     if(sortDir) {
@@ -84,7 +116,8 @@ export class DataTableHeaderCellComponent {
 
   @HostBinding('attr.title')
   get name(): string {
-    return this.column.name || this.column.prop;
+    // guaranteed to have a value by setColumnDefaults() in column-helper.ts
+    return this.column.headerTemplate === undefined ? this.column.name : undefined;
   }
 
   @HostBinding('style.minWidth.px')
@@ -102,16 +135,16 @@ export class DataTableHeaderCellComponent {
     return this.column.width;
   }
 
+  @HostListener('contextmenu', ['$event'])
+  onContextmenu($event: MouseEvent): void {
+    this.columnContextmenu.emit({ event: $event, column: this.column });
+  }
+
   get isCheckboxable(): boolean {
     return this.column.checkboxable && 
       this.column.headerCheckboxable && 
       this.selectionType === SelectionType.checkbox;
   }
-
-  sortFn = this.onSort.bind(this);
-  sortClass: string;
-  sortDir: SortDirection;
-  _sorts: any[];
 
   calcSortDir(sorts: any[]): any {
     if(sorts && this.column) {
@@ -123,7 +156,7 @@ export class DataTableHeaderCellComponent {
     }
   }
 
-  @HostListener('click') onSort(): void {
+  onSort(): void {
     if(!this.column.sortable) return;
 
     const newValue = nextSortDir(this.sortType, this.sortDir);
@@ -134,7 +167,7 @@ export class DataTableHeaderCellComponent {
     });
   }
 
-  calcSortClass(sortDir): string {
+  calcSortClass(sortDir: SortDirection): string {
     if(sortDir === SortDirection.asc) {
       return `sort-btn sort-asc ${this.sortAscendingIcon}`;
     } else if(sortDir === SortDirection.desc) {

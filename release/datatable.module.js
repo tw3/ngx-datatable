@@ -5,6 +5,7 @@ var common_1 = require("@angular/common");
 require("rxjs/add/observable/fromEvent");
 var components_1 = require("./components");
 var directives_1 = require("./directives");
+var services_1 = require("./services");
 var NgxDatatableModule = (function () {
     function NgxDatatableModule() {
     }
@@ -15,7 +16,11 @@ NgxDatatableModule.decorators = [
                 imports: [
                     common_1.CommonModule
                 ],
+                providers: [
+                    services_1.ScrollbarHelper
+                ],
                 declarations: [
+                    components_1.DataTableFooterTemplateDirective,
                     directives_1.VisibilityDirective,
                     directives_1.DraggableDirective,
                     directives_1.ResizeableDirective,
@@ -37,7 +42,8 @@ NgxDatatableModule.decorators = [
                     components_1.DataTableBodyCellComponent,
                     components_1.DataTableSelectionComponent,
                     components_1.DataTableColumnHeaderDirective,
-                    components_1.DataTableColumnCellDirective
+                    components_1.DataTableColumnCellDirective,
+                    components_1.DatatableFooterDirective
                 ],
                 exports: [
                     components_1.DatatableComponent,
@@ -45,7 +51,10 @@ NgxDatatableModule.decorators = [
                     components_1.DatatableRowDetailTemplateDirective,
                     components_1.DataTableColumnDirective,
                     components_1.DataTableColumnHeaderDirective,
-                    components_1.DataTableColumnCellDirective
+                    components_1.DataTableColumnCellDirective,
+                    components_1.DataTableFooterTemplateDirective,
+                    components_1.DatatableFooterDirective,
+                    components_1.DataTablePagerComponent
                 ]
             },] },
 ];

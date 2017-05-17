@@ -1,9 +1,12 @@
 import { ElementRef, EventEmitter, OnInit, QueryList, AfterViewInit, DoCheck, KeyValueDiffers, KeyValueDiffer } from '@angular/core';
-import { ColumnMode, SortType, SelectionType } from '../types';
+import { ScrollbarHelper } from '../services';
+import { ColumnMode, SortType, SelectionType, TableColumn, ContextmenuType } from '../types';
 import { DataTableBodyComponent } from './body';
 import { DataTableColumnDirective } from './columns';
 import { DatatableRowDetailDirective } from './row-detail';
+import { DatatableFooterDirective } from './footer';
 export declare class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
+    private scrollbarHelper;
     /**
      * Gets the rows.
      *
@@ -29,7 +32,7 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      *
      * @memberOf DatatableComponent
      */
-    columns: any[];
+    columns: TableColumn[];
     /**
      * List of row objects that should be
      * represented as selected in the grid.
@@ -287,13 +290,16 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      */
     resize: EventEmitter<any>;
     /**
-     * The context menu was invoked on a row.
+     * The context menu was invoked on the table.
+     * type indicates whether the header or the body was clicked.
+     * content contains either the column or the row that was clicked.
      *
      * @memberOf DatatableComponent
      */
-    rowContextmenu: EventEmitter<{
+    tableContextmenu: EventEmitter<{
         event: MouseEvent;
-        row: any;
+        type: ContextmenuType;
+        content: any;
     }>;
     /**
      * CSS class applied if the header height if fixed height.
@@ -399,6 +405,13 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      */
     rowDetail: DatatableRowDetailDirective;
     /**
+     * Footer template gathered from the ContentChild
+     *
+     * @type {DatatableFooterDirective}
+     * @memberOf DatatableComponent
+     */
+    footer: DatatableFooterDirective;
+    /**
      * Reference to the body component for manually
      * invoking functions on the body.
      *
@@ -425,10 +438,9 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
     rowDiffer: KeyValueDiffer<{}, {}>;
     _count: number;
     _rows: any[];
-    _origRows: any[];
-    _columns: any[];
+    _columns: TableColumn[];
     _columnTemplates: QueryList<DataTableColumnDirective>;
-    constructor(element: ElementRef, differs: KeyValueDiffers);
+    constructor(scrollbarHelper: ScrollbarHelper, element: ElementRef, differs: KeyValueDiffers);
     /**
      * Lifecycle hook that is called after data-bound
      * properties of a directive are initialized.
@@ -537,6 +549,22 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      * @memberOf DatatableComponent
      */
     calcRowCount(val?: any[]): number;
+    /**
+     * The header triggered a contextmenu event.
+     *
+     * @param {*} { event, column }
+     *
+     * @memberOf DatatableComponent
+     */
+    onColumnContextmenu({event, column}: any): void;
+    /**
+     * The body triggered a contextmenu event.
+     *
+     * @param {*} { event, row }
+     *
+     * @memberOf DatatableComponent
+     */
+    onRowContextmenu({event, row}: any): void;
     /**
      * The header triggered a column resize event.
      *

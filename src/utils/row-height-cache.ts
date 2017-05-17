@@ -30,19 +30,23 @@ export class RowHeightCache {
    * @param rowHeight The row height.
    * @param detailRowHeight The detail row height.
    */
-  initCache(rows: any[], rowHeight: number, detailRowHeight: number): void {
-    if (isNaN(rowHeight)) {
+  initCache(details: any): void {
+    const { rows, rowHeight, detailRowHeight, externalVirtual, rowCount } = details;
+    const isFn = typeof rowHeight === 'function';
+    const isDetailFn = typeof detailRowHeight === 'function';
+
+    if (!isFn && isNaN(rowHeight)) {
       throw new Error(`Row Height cache initialization failed. Please ensure that 'rowHeight' is a
-        valid number value: (${rowHeight}) when 'scrollbarV' is enabled.`);
+        valid number or function value: (${rowHeight}) when 'scrollbarV' is enabled.`);
     }
 
     // Add this additional guard in case detailRowHeight is set to 'auto' as it wont work.
-    if (isNaN(detailRowHeight)) {
+    if (!isDetailFn && isNaN(detailRowHeight)) {
       throw new Error(`Row Height cache initialization failed. Please ensure that 'detailRowHeight' is a
-        valid number value: (${detailRowHeight}) when 'scrollbarV' is enabled.`);
+        valid number or function value: (${detailRowHeight}) when 'scrollbarV' is enabled.`);
     }
 
-    const n = rows.length;
+    const n = externalVirtual ? rowCount : rows.length;
     this.treeArray = new Array(n);
 
     for(let i = 0; i < n; ++i) {
@@ -50,12 +54,20 @@ export class RowHeightCache {
     }
 
     for(let i = 0; i < n; ++i) {
+      const row = rows[i];
       let currentRowHeight = rowHeight;
+      if(isFn) {
+        currentRowHeight = rowHeight(row);
+      }
 
       // Add the detail row height to the already expanded rows.
       // This is useful for the table that goes through a filter or sort.
-      if (rows[i] && rows[i].$$expanded === 1) {
-        currentRowHeight += detailRowHeight;
+      if(row && row.$$expanded === 1) {
+        if(isDetailFn) {
+          currentRowHeight += detailRowHeight(row, row.$$index);
+        } else {
+          currentRowHeight += detailRowHeight;
+        }
       }
 
       this.update(i, currentRowHeight);

@@ -24,6 +24,7 @@ import { DataTableColumnDirective } from '../columns';
           (resize)="onColumnResized($event, column)"
           long-press
           [pressModel]="column"
+          [pressEnabled]="reorderable && column.draggable"
           (longPressStart)="onLongPressStart($event)"
           (longPressEnd)="onLongPressEnd($event)"
           draggable
@@ -38,8 +39,10 @@ import { DataTableColumnDirective } from '../columns';
           [selectionType]="selectionType"
           [sortAscendingIcon]="sortAscendingIcon"
           [sortDescendingIcon]="sortDescendingIcon"
+          [allRowsSelected]="allRowsSelected"
           (sort)="onSort($event)"
-          (select)="select.emit($event)">
+          (select)="select.emit($event)"
+          (columnContextmenu)="columnContextmenu.emit($event)">
         </datatable-header-cell>
       </div>
     </div>
@@ -72,7 +75,7 @@ export class DataTableHeaderComponent {
     }
   }
 
-  get headerHeight() {
+  get headerHeight(): any {
     return this._headerHeight;
   }
 
@@ -92,20 +95,26 @@ export class DataTableHeaderComponent {
   @Output() reorder: EventEmitter<any> = new EventEmitter();
   @Output() resize: EventEmitter<any> = new EventEmitter();
   @Output() select: EventEmitter<any> = new EventEmitter();
+  @Output() columnContextmenu = new EventEmitter<{ event: MouseEvent, column: any }>(false);
 
   columnsByPin: any;
   columnGroupWidths: any;
   _columns: any[];
   _headerHeight: string;
 
-  onLongPressStart({ event, model }) {
+  onLongPressStart({ event, model }: { event: any, model: any }) {
     model.dragging = true;
     this.dragEventTarget = event;
   }
 
-  onLongPressEnd({ event, model }) {
-    model.dragging = false;
+  onLongPressEnd({ event, model }: { event: any, model: any }) {
     this.dragEventTarget = event;
+
+    // delay resetting so sort can be 
+    // prevented if we were dragging
+    setTimeout(() => { 
+      model.dragging = false;
+    }, 5);
   }
 
   @HostBinding('style.width')
@@ -148,6 +157,9 @@ export class DataTableHeaderComponent {
   }
 
   onSort({ column, prevValue, newValue }: any): void {
+    // if we are dragging don't sort!
+    if(column.dragging) return;
+
     const sorts = this.calcNewSorts(column, prevValue, newValue);
     this.sort.emit({
       sorts,

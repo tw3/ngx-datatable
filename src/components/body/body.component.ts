@@ -32,7 +32,7 @@ import { ScrollerComponent } from './scroller.component';
           *ngFor="let row of temp; let i = index; trackBy: rowTrackingFn;"
           [ngStyle]="getRowsStyles(row)"
           [rowDetail]="rowDetail"
-          [detailRowHeight]="detailRowHeight"
+          [detailRowHeight]="getDetailRowHeight(row,i)"
           [row]="row"
           [expanded]="row.$$expanded === 1"
           (rowContextmenu)="rowContextmenu.emit($event)">
@@ -42,7 +42,7 @@ import { ScrollerComponent } from './scroller.component';
             [innerWidth]="innerWidth"
             [offsetX]="offsetX"
             [columns]="columns"
-            [rowHeight]="rowHeight"
+            [rowHeight]="getRowHeight(row)"
             [row]="row"
             [rowClass]="rowClass"
             (activate)="selector.onActivate($event, i)">
@@ -65,6 +65,7 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
   @Input() scrollbarV: boolean;
   @Input() scrollbarH: boolean;
   @Input() loadingIndicator: boolean;
+  @Input() externalPaging: boolean;
   @Input() rowHeight: number;
   @Input() offsetX: number;
   @Input() emptyMessage: string;
@@ -185,11 +186,6 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
     }
   }
 
-  get detailRowHeight(): number {
-    if(!this.rowDetail) return 0;
-    return this.rowDetail.rowHeight;
-  }
-
   rowHeightsCache: RowHeightCache = new RowHeightCache();
   temp: any[] = [];
   offsetY: number = 0;
@@ -205,6 +201,11 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
   _offset: number;
   _pageSize: number;
 
+  /**
+   * Creates an instance of DataTableBodyComponent.
+   * 
+   * @memberOf DataTableBodyComponent
+   */
   constructor() {
     // declare fn here so we can get access to the `this` property
     this.rowTrackingFn = function(index: number, row: any): any {
@@ -223,10 +224,11 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     if(this.rowDetail) {
-      this.listener = this.rowDetail.toggle.subscribe(({ type, value }) => {
-        if(type === 'row') this.toggleRowExpansion(value);
-        if(type === 'all') this.toggleAllRows(value);
-      });
+      this.listener = this.rowDetail.toggle
+        .subscribe(({ type, value }: { type: string, value: any }) => {
+          if(type === 'row') this.toggleRowExpansion(value);
+          if(type === 'all') this.toggleAllRows(value);
+        });
     }
   }
 
@@ -248,9 +250,8 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
    */
   updateOffsetY(offset?: number): void {
     // scroller is missing on empty table
-    if(!this.scroller) {
-        return;
-    }
+    if(!this.scroller) return;
+
     if(this.scrollbarV && offset) {
       // First get the row Index that we need to move to.
       const rowIndex = this.pageSize * offset;
@@ -337,6 +338,25 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Get the row height
+   * 
+   * @param {*} row 
+   * @returns {number} 
+   * 
+   * @memberOf DataTableBodyComponent
+   */
+  getRowHeight(row: any): number {
+    let rowHeight = this.rowHeight;
+
+    // if its a function return it
+    if(typeof this.rowHeight === 'function') {
+      rowHeight = this.rowHeight(row);
+    }
+
+    return rowHeight;
+  }
+
+  /**
    * Calculate row height based on the expanded state of the row.
    * 
    * @param {*} row the row for which the height need to be calculated.
@@ -344,10 +364,30 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
    * 
    * @memberOf DataTableBodyComponent
    */
-  getRowHeight(row: any): number {
+  getRowAndDetailHeight(row: any): number {
+    let rowHeight = this.getRowHeight(row);
+
     // Adding detail row height if its expanded.
-    return this.rowHeight +
-      (row.$$expanded === 1 ? this.detailRowHeight : 0);
+    if(row.$$expanded === 1) {
+      rowHeight += this.getDetailRowHeight(row);
+    }
+
+    return rowHeight;
+  }
+
+  /**
+   * Get the height of the detail row.
+   * 
+   * @param {*} [row] 
+   * @param {*} [index] 
+   * @returns {number} 
+   * 
+   * @memberOf DataTableBodyComponent
+   */
+  getDetailRowHeight = (row?: any, index?: any): number => {
+    if (!this.rowDetail) return 0;
+    const rowHeight = this.rowDetail.rowHeight;
+    return typeof rowHeight === 'function' ? rowHeight(row, index) : rowHeight;
   }
 
   /**
@@ -371,7 +411,7 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
    * @memberOf DataTableBodyComponent
    */
   getRowsStyles(row: any): any {
-    const rowHeight = this.getRowHeight(row);
+    const rowHeight = this.getRowAndDetailHeight(row);
 
     const styles = {
       height: rowHeight + 'px'
@@ -418,7 +458,11 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
       first = this.rowHeightsCache.getRowIndex(this.offsetY);
       last = this.rowHeightsCache.getRowIndex(height + this.offsetY) + 1;
     } else {
-      first = Math.max(this.offset * this.pageSize, 0);
+      // The server is handling paging and will pass an array that begins with the
+      // element at a specified offset.  first should always be 0 with external paging.
+      if (!this.externalPaging) {
+        first = Math.max(this.offset * this.pageSize, 0);
+      }
       last = Math.min((first + this.pageSize), this.rowCount);
     }
 
@@ -443,8 +487,13 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
 
     // Initialize the tree only if there are rows inside the tree.
     if (this.rows && this.rows.length) {
-      this.rowHeightsCache.initCache(
-        this.rows, this.rowHeight, this.detailRowHeight);
+      this.rowHeightsCache.initCache({
+        rows: this.rows, 
+        rowHeight: this.rowHeight, 
+        detailRowHeight: this.getDetailRowHeight,
+        externalVirtual: this.scrollbarV && this.externalPaging,
+        rowCount: this.rowCount
+      });
     }
   }
 
@@ -485,7 +534,7 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
 
     // If the detailRowHeight is auto --> only in case of non-virtualized scroll
     if(this.scrollbarV) {
-      const detailRowHeight = this.detailRowHeight * (row.$$expanded ? -1 : 1);
+      const detailRowHeight = this.getDetailRowHeight(row) * (row.$$expanded ? -1 : 1);
       this.rowHeightsCache.update(row.$$index, detailRowHeight);
     }
 
