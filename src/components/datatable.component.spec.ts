@@ -16,17 +16,17 @@ describe('Datatable component', () => {
   describe('When the column is sorted with a custom comparator', () => {
 
     it('should return a new array', () => {
-      let fixture = TestBed.createComponent(DatatableComponent);
-      let initialRows = [
+      const fixture = TestBed.createComponent(DatatableComponent);
+      const initialRows = [
         {id: 1},
         {id: 2},
         {id: 3}
       ];
 
-      let columns = [
+      const columns = [
         {
           prop: 'foo',
-          comparator: (propA, propB) => {
+          comparator: (propA: string, propB: string) => {
             if (propA.toLowerCase() > propB.toLowerCase()) return -1;
             if (propA.toLowerCase() < propB.toLowerCase()) return 1;
           }
@@ -45,22 +45,21 @@ describe('Datatable component', () => {
       });
 
       fixture.componentInstance.sort
-        .subscribe(() => {
-        });
+        .subscribe();
 
       expect(fixture.componentInstance.rows).not.toBe(initialRows);
     });
   });
 
   it('should set offset to 0 when sorting by a column', () => {
-    let fixture = TestBed.createComponent(DatatableComponent);
-    let initialRows = [
+    const fixture = TestBed.createComponent(DatatableComponent);
+    const initialRows = [
       {id: 1},
       {id: 2},
       {id: 3}
     ];
 
-    let columns = [
+    const columns = [
       {
         prop: 'id'
       }
@@ -77,6 +76,27 @@ describe('Datatable component', () => {
     });
 
     expect(fixture.componentInstance.offset).toBe(0);
+  });
+
+  describe('table with numeric prop', () => {
+    it('should support array data', () => {
+      const fixture = TestBed.createComponent(DatatableComponent);
+
+      const tableInstance = fixture.componentInstance;
+      tableInstance.rows = [
+        ['Hello', 123]
+      ];
+
+      tableInstance.columns = [
+        { prop: 0 },
+        { prop: 1 }
+      ];
+
+      // previously, an exception was thrown from column-helper.ts setColumnDefaults()
+      fixture.detectChanges();
+
+      expect(tableInstance.columns).toBeTruthy();
+    });
   });
 
 });

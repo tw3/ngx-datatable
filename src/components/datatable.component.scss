@@ -136,18 +136,19 @@
       position: relative;
       display: inline-block;
 
-      &.longpress {
-        cursor: move;
+      .datatable-header-cell-wrapper {
+        cursor: pointer;
       }
 
-      &.sortable {
-        cursor: pointer;
+      &.longpress .datatable-header-cell-wrapper {
+        cursor: move;
       }
 
       .sort-btn {
         line-height: 100%;
         vertical-align: middle;
         display: inline-block;
+        cursor: pointer;
       }
 
       .resize-handle{
@@ -222,7 +223,7 @@
     display: block;
     width: 100%;
 
-    > div {
+    .datatable-footer-inner {
       display: flex;
       align-items: center;
       width: 100%;
@@ -238,12 +239,10 @@
     }
 
     .page-count{
-      display: inline-block;
       flex: 1 1 20%;
     }
 
     .datatable-pager{
-      display: inline-block;
       flex: 1 1 80%;
       text-align: right;
 

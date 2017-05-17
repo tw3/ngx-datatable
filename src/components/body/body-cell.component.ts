@@ -3,8 +3,9 @@ import {
   Output, EventEmitter, HostListener, ElementRef, ViewContainerRef, OnDestroy
 } from '@angular/core';
 
-import { deepValueGetter, Keys } from '../../utils';
+import { Keys } from '../../utils';
 import { SortDirection } from '../../types';
+import { TableColumn } from '../../types/table-column.type';
 
 @Component({
   selector: 'datatable-body-cell',
@@ -24,10 +25,17 @@ import { SortDirection } from '../../types';
         [title]="value"
         [innerHTML]="value">
       </span>
-      <ng-template
+      <ng-template #cellTemplate
         *ngIf="column.cellTemplate"
         [ngTemplateOutlet]="column.cellTemplate"
-        [ngOutletContext]="{ value: value, row: row, column: column }">
+        [ngOutletContext]="{
+          value: value,
+          row: row,
+          column: column,
+          isSelected: isSelected,
+          onCheckboxChangeFn: onCheckboxChangeFn,
+          activateFn: activateFn
+        }">
       </ng-template>
     </div>
   `,
@@ -38,7 +46,7 @@ import { SortDirection } from '../../types';
 export class DataTableBodyCellComponent implements OnDestroy {
 
   @Input() row: any;
-  @Input() column: any;
+  @Input() column: TableColumn;
   @Input() rowHeight: number;
   @Input() isSelected: boolean;
 
@@ -58,26 +66,31 @@ export class DataTableBodyCellComponent implements OnDestroy {
   @HostBinding('class')
   get columnCssClasses(): any {
     let cls = 'datatable-body-cell';
-    if(this.column.cssClasses) cls += ' ' + this.column.cssClasses;
+    if(this.column.cellClass) {
+      if(typeof this.column.cellClass === 'string') {
+        cls += ' ' + this.column.cellClass;
+      } else if(typeof this.column.cellClass === 'function') {
+        const res = this.column.cellClass({ 
+          row: this.row, 
+          column: this.column, 
+          value: this.value 
+        });
+
+        if(typeof res === 'string') {
+          cls += res;
+        } else if(typeof res === 'object') {
+          const keys = Object.keys(res);
+          for(const k of keys) {
+            if(res[k] === true) cls += ` ${k}`;
+          }
+        }
+      }
+    }
+    if(!this.sortDir) cls += ' sort-active';
+    if(this.isFocused) cls += ' active';
+    if(this.sortDir === SortDirection.asc) cls += ' sort-asc';
+    if(this.sortDir === SortDirection.desc) cls += ' sort-desc';
     return cls;
-  }
-
-  @HostBinding('class.active')
-  isFocused: boolean = false;
-
-  @HostBinding('class.sort-active')
-  get isSortActive(): boolean {
-    return !this.sortDir;
-  }
-
-  @HostBinding('class.sort-asc')
-  get isSortAscending(): boolean {
-    return this.sortDir === SortDirection.asc;
-  }
-
-  @HostBinding('class.sort-desc')
-  get isSortDescending(): boolean {
-    return this.sortDir === SortDirection.desc;
   }
 
   @HostBinding('style.width.px')
@@ -93,8 +106,8 @@ export class DataTableBodyCellComponent implements OnDestroy {
   }
 
   get value(): any {
-    if (!this.row || !this.column || !this.column.prop) return '';
-    const val = deepValueGetter(this.row, this.column.prop);
+    if (!this.row || !this.column) return '';
+    const val = this.column.$$valueGetter(this.row, this.column.prop);
     const userPipe: PipeTransform = this.column.pipe;
 
     if(userPipe) return userPipe.transform(val);
@@ -105,6 +118,9 @@ export class DataTableBodyCellComponent implements OnDestroy {
   sortDir: SortDirection;
   element: any;
   _sorts: any[];
+  isFocused: boolean = false;
+  onCheckboxChangeFn = this.onCheckboxChange.bind(this);
+  activateFn = this.activate.emit.bind(this.activate);
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -177,7 +193,7 @@ export class DataTableBodyCellComponent implements OnDestroy {
     }
   }
 
-  onCheckboxChange(event): void {
+  onCheckboxChange(event: any): void {
     this.activate.emit({
       type: 'checkbox',
       event,

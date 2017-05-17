@@ -91,16 +91,18 @@ export class OrderableDirective implements AfterContentInit, OnDestroy {
     element.style.left = 'auto';
   }
 
-  isTarget(model, event): any {
+  isTarget(model: any, event: any): any {
     let i = 0;
-    const targets = this.document.elementsFromPoint(event.x, event.y);
+    const x = event.x || event.clientX;
+    const y = event.y || event.clientY;
+    const targets = this.document.elementsFromPoint(x, y);
 
     for (const prop in this.positions) {
       // current column position which throws event.
       const pos = this.positions[ prop ];
 
       // since we drag the inner span, we need to find it in the elements at the cursor
-      if (model.prop !== prop && targets.find((el) => el === pos.element)) {
+      if (model.prop !== prop && targets.find((el: any) => el === pos.element)) {
         return {
           pos,
           i

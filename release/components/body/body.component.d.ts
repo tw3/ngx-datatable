@@ -6,6 +6,7 @@ export declare class DataTableBodyComponent implements OnInit, OnDestroy {
     scrollbarV: boolean;
     scrollbarH: boolean;
     loadingIndicator: boolean;
+    externalPaging: boolean;
     rowHeight: number;
     offsetX: number;
     emptyMessage: string;
@@ -52,7 +53,6 @@ export declare class DataTableBodyComponent implements OnInit, OnDestroy {
      * @memberOf DataTableBodyComponent
      */
     readonly scrollHeight: number;
-    readonly detailRowHeight: number;
     rowHeightsCache: RowHeightCache;
     temp: any[];
     offsetY: number;
@@ -66,6 +66,11 @@ export declare class DataTableBodyComponent implements OnInit, OnDestroy {
     _rowCount: number;
     _offset: number;
     _pageSize: number;
+    /**
+     * Creates an instance of DataTableBodyComponent.
+     *
+     * @memberOf DataTableBodyComponent
+     */
     constructor();
     /**
      * Called after the constructor, initializing input properties
@@ -111,6 +116,15 @@ export declare class DataTableBodyComponent implements OnInit, OnDestroy {
      */
     updateRows(): void;
     /**
+     * Get the row height
+     *
+     * @param {*} row
+     * @returns {number}
+     *
+     * @memberOf DataTableBodyComponent
+     */
+    getRowHeight(row: any): number;
+    /**
      * Calculate row height based on the expanded state of the row.
      *
      * @param {*} row the row for which the height need to be calculated.
@@ -118,7 +132,17 @@ export declare class DataTableBodyComponent implements OnInit, OnDestroy {
      *
      * @memberOf DataTableBodyComponent
      */
-    getRowHeight(row: any): number;
+    getRowAndDetailHeight(row: any): number;
+    /**
+     * Get the height of the detail row.
+     *
+     * @param {*} [row]
+     * @param {*} [index]
+     * @returns {number}
+     *
+     * @memberOf DataTableBodyComponent
+     */
+    getDetailRowHeight: (row?: any, index?: any) => number;
     /**
      * Calculates the styles for the row so that the rows can be moved in 2D space
      * during virtual scroll inside the DOM.   In the below case the Y position is
